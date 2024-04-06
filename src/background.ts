@@ -28,6 +28,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 const END_CARD_DURATION = 20000;  // 20 seconds
+const BUFFER = 500;  // 1/2 second
 
 
 // cannot use async/await here since the message port listening for the response will time out
@@ -36,7 +37,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         const tabId = tabs[0].id;
         if (!tabId) throw new Error(`This tab does not have a tab id, unable to run the extension on tabs without an id`);
         let playbackState = request.state;
-        let endTime = request.endTime - END_CARD_DURATION;
+        let endTime = request.endTime - END_CARD_DURATION - BUFFER;
         console.log("Ending at: " + new Date(endTime).toLocaleTimeString());
         switch (playbackState) {
             case "playing":

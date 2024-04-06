@@ -19,7 +19,7 @@ function waitForElement(selector: string, callback: (playButton: Element) => voi
     search();
 }
 
-function onPlayButtonTitleChange(mutationsList: MutationRecord[]) {
+function onChange() {
 
     if (getChannelName() !== 'Scott Manley') {
         return;
@@ -29,16 +29,11 @@ function onPlayButtonTitleChange(mutationsList: MutationRecord[]) {
     const duration = getVideoDuration();
     const timeLeft = duration - currentTime;
     const endTime = new Date(Date.now() + timeLeft * 1000);
+    const state = getPlaybackState();
 
-    for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
-            const target = <HTMLButtonElement>mutation.target;
-            const state = (target.title === 'Pause (k)') ? 'playing' : 'paused';
-            chrome.runtime.sendMessage(
-                {state: state, endTime: endTime.getTime()}
-            );
-        }
-    }
+    chrome.runtime.sendMessage(
+        {state: state, endTime: endTime.getTime()}
+    );
 }
 
 function getVideoDuration() {
@@ -69,11 +64,15 @@ function getChannelName() {
     return channelName.innerText;
 }
 
-waitForElement('.ytp-play-button', (playButton: Element) => {
+function getPlaybackState() {
+    const playPause = <HTMLButtonElement>document.getElementsByClassName('ytp-play-button')[0];
+    return (playPause.title === 'Pause (k)') ? 'playing' : 'paused';
+}
+
+waitForElement('.ytp-time-current', (timeSpan: Element) => {
     // Element is found, set up the observer
-    const observer = new MutationObserver(onPlayButtonTitleChange);
-    observer.observe(playButton, {
-        attributes: true,
-        attributeFilter: ['title']
+    const observer = new MutationObserver(onChange);
+    observer.observe(timeSpan, {
+        childList: true
     });
 });
