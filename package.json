@@ -1,36 +1,29 @@
 {
-  "name": "youtube-sleep-timer",
+  "name": "scott-manley-sleep-timer",
   "version": "2.3.0",
-  "description": "A sleep timer for YouTube!",
+  "description": "Pauses Scott Manley's videos right before the end.",
   "main": "background.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack/webpack.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snoringriceball/youtube-sleep-timer.git"
+    "url": "git+https://github.com/AdrianMiska/scott-manley-sleep-timer.git"
   },
   "keywords": [],
-  "author": "Snoring Riceball, joy91227",
-  "license": "ISC",
+  "author": "Snoring Riceball, joy91227, Adrian Miska",
+  "license": "CC BY-NC-SA 4.0",
   "bugs": {
-    "url": "https://github.com/snoringriceball/youtube-sleep-timer/issues"
+    "url": "https://github.com/AdrianMiska/scott-manley-sleep-timer/issues"
   },
-  "homepage": "https://github.com/snoringriceball/youtube-sleep-timer#readme",
   "devDependencies": {
-    "@types/chrome": "^0.0.180",
-    "@types/offscreencanvas": "^2019.6.4",
-    "copy-webpack-plugin": "^10.2.4",
-    "ts-loader": "^9.2.8",
-    "typescript": "^4.6.3",
-    "webpack": "^5.71.0",
-    "webpack-cli": "^4.9.2"
-  },
-  "dependencies": {
-    "nanoid": "^3.3.2"
+    "@types/chrome": "^0.0.265",
+    "@types/offscreencanvas": "^2019.7.3",
+    "copy-webpack-plugin": "^12.0.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4 "
   }
 }
