@@ -1,19 +1,24 @@
 {
-  "author": "Snoring Riceball",
-  "name": "YouTube Sleep Timer",
+  "author": "Adrian Freakout",
+  "name": "Scott Manley Sleep Timer",
   "version": "2.3",
-  "description": "A video play/pause timer for Youtube! Also serves as a sleep timer :)",
+  "description": "Pauses Scott Manley's videos right before the end so you don't wake up from the sound of the end card.",
   "content_security_policy": {
     "default-src": "self"
   },
   "minimum_chrome_version": "99",
   "permissions": [
+    "activeTab",
     "declarativeContent",
     "alarms",
     "scripting",
     "tabs",
     "storage"
   ],
+  "content_scripts": [{
+    "matches": ["https://*.youtube.com/*"],
+    "js": ["content.js"]
+  }],
   "host_permissions": [
     "https://*.youtube.com/"
   ],
@@ -22,7 +27,6 @@
   },
   "action": {
     "default_title": "YouTube Sleep Timer",
-    "default_popup": "popup.html",
     "default_icon": {
       "16": "images/greyscale_clock_16.png",
       "32": "images/greyscale_clock_32.png",
