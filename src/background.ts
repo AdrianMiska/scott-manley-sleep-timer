@@ -28,7 +28,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 const END_CARD_DURATION = 20000;  // 20 seconds
-const BUFFER = 500;  // 1/2 second
+const BUFFER = 1000;  // 1 second
 
 
 // cannot use async/await here since the message port listening for the response will time out
