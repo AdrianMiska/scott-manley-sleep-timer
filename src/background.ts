@@ -32,7 +32,7 @@ const BUFFER = 1000;  // 1 second
 
 
 // cannot use async/await here since the message port listening for the response will time out
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, _, sendResponse) {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         const tabId = tabs[0].id;
         if (!tabId) throw new Error(`This tab does not have a tab id, unable to run the extension on tabs without an id`);
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         switch (playbackState) {
             case "playing":
                 console.log(`start alarm for tab ${tabId}`)
-                chrome.alarms.create(String(tabId), {when: endTime});
+                await chrome.alarms.create(String(tabId), {when: endTime});
                 sendResponse();
                 break;
             case "paused":
