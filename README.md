@@ -19,7 +19,7 @@ After cloning the repo, run `npm install && npm run build` to compile the ts fil
 
 This project is a fork of [youtube-sleep-timer](https://github.com/snoringriceball/youtube-sleep-timer) by [snoringriceball](https://github.com/snoringriceball) licensed under CC BY-NC-SA 4.0.
 
-Changes made to the original work include removing the action UI and instead triggering based on the playback state on the video.
+In reality by now it's mostly new and unrelated code, but the original idea and some of the config is still there, so I'm keeping the license.
 
 This extension uses the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**, please see LICENSE.md for details.
 

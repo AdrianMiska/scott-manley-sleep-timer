@@ -17,6 +17,7 @@ async function getElement(selector: string, delay = 10, maxAttempts = 10): Promi
                 reject();
             }
         }
+
         search();
     });
 }
@@ -26,6 +27,8 @@ async function getChannelName(): Promise<string | undefined> {
     const channelElement = await getElement(".ytd-channel-name") as HTMLElement | null;
     return channelElement?.innerText;
 }
+
+const END_CARD_DURATION = 21;  // 20 seconds + 1 second for good measure
 
 getElement(".video-stream").then(async (video: Element) => {
     if (await getChannelName() !== 'Scott Manley') {
@@ -40,12 +43,11 @@ getElement(".video-stream").then(async (video: Element) => {
         const currentTime = videoElement.currentTime;
         const duration = videoElement.duration;
         const timeLeft = duration - currentTime;
-        const endTime = new Date(Date.now() + timeLeft * 1000);
-        const state = videoElement.paused ? 'paused' : 'playing';
 
-        chrome.runtime.sendMessage(
-            {state: state, endTime: endTime.getTime()}
-        );
+        if (timeLeft <= END_CARD_DURATION) {
+            console.log('Pausing video');
+            videoElement.pause();
+        }
     });
 
 });
